@@ -392,11 +392,16 @@ class SQLAlchemyBase(BaseType):
         except NoResultFound:
             return None
 
+  #  def resolve_id(self, info):
+  #      # graphene_type = info.parent_type.graphene_type
+  #      keys = self.__mapper__.primary_key_from_instance(self)
+  #      return tuple(keys) if len(keys) > 1 else keys[0]
+        
     def resolve_id(self, info):
         # graphene_type = info.parent_type.graphene_type
         keys = self.__mapper__.primary_key_from_instance(self)
-        return tuple(keys) if len(keys) > 1 else keys[0]
-
+        return keys[0]
+        
     @classmethod
     def enum_for_field(cls, field_name):
         return enum_for_field(cls, field_name)
